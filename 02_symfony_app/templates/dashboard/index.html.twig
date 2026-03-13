@@ -1,0 +1,49 @@
+{% extends 'basAdmin.html.twig' %}
+
+
+
+{% block body %}
+    <body class="app">
+    {% include 'shared/_headerAdmin.html.twig' %}
+
+
+    <div class="app-wrapper">
+
+        <div class="app-content pt-3 p-md-3 p-lg-4" style="position:absolute; clip:rect(0px,1100px,700px,0px);
+                             ">
+            <div class="container-xl">
+                <di class="row">
+                    <div class="col col-lg-9">
+                        <h1 class="app-page-title">Dashboard</h1></div>
+
+                    <div class="col-2 " >
+                        <a class="btn " target="_blank" style="    background: #2a5b8d;
+    color: #fff;
+    border-color: #2a5b8d;"
+                           href="https://app.powerbi.com/reportEmbed?reportId=560b8826-dd93-423f-ae2b-7cab597af0df&autoAuth=true&ctid=604f1a96-cbe8-43f8-abbf-f8eaf5d85730">
+                            <i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a>
+                    </div><!--//col--></di>
+                <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+                    <iframe title="pfe-cvs - Copie" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=8b1b8cd0-2eac-410c-acfb-d4ec51b07e5a&autoAuth=true&ctid=604f1a96-cbe8-43f8-abbf-f8eaf5d85730" frameborder="0" allowFullScreen="true"></iframe>
+                            <div class="row gx-5 gy-3">
+                                <div class="col-12 col-lg-9">
+
+                                    <div>
+
+                            </div><!--//row-->
+                        </div><!--//app-card-body-->
+
+                    </div><!--//inner-->
+                </div><!--//app-card-->
+
+
+            </div><!--//container-fluid--> 
+                </div><!--//app-content-->
+
+
+            </div><!--//app-wrapper-->
+        </div>
+    </div>
+
+    </body>
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'basAdmin.html.twig' %}
+
+{% block body %}
+<body class="app">
+{% include 'shared/_headerAdmin.html.twig' %}
+<div class="app-wrapper">
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+
+            <div class="row">
+                <div class="col col-lg-9">
+                    <h1 class="app-page-title">Prédiction Diabète</h1>
+                </div>
+                <div class="col text-end">
+                    {% if apiOnline is defined and apiOnline %}
+                        <span class="badge bg-success">● API Flask connectée</span>
+                    {% else %}
+                        <span class="badge bg-danger">● API Flask hors ligne</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if error is defined and error %}
+                <div class="alert alert-danger">⚠️ {{ error }}</div>
+            {% endif %}
+
+            <div class="app-card shadow-sm mb-4">
+                <div class="card-body app-card-body p-3 p-lg-4">
+                    <p class="text-uppercase text-sm">PRÉDICTION DU <strong>Diabète</strong></p>
+
+                    {{ form_start(form, {'action': path('app_prediction'), 'method': 'POST'}) }}
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.age, 'Âge', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.age, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 35'}}) }}
+                                {{ form_errors(form.age) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.pregnancies, 'Nombre de grossesses', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.pregnancies, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 2'}}) }}
+                                {{ form_errors(form.pregnancies) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.glucose, 'Glycémie (mg/dL)', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.glucose, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 120'}}) }}
+                                {{ form_errors(form.glucose) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.blood_pressure, 'Pression artérielle (mmHg)', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.blood_pressure, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 70'}}) }}
+                                {{ form_errors(form.blood_pressure) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.skin_thickness, 'Épaisseur pli cutané (mm)', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.skin_thickness, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 20'}}) }}
+                                {{ form_errors(form.skin_thickness) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.insulin, 'Insuline (mu U/ml)', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.insulin, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 80'}}) }}
+                                {{ form_errors(form.insulin) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.bmi, 'IMC - Body Mass Index', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.bmi, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 25.5'}}) }}
+                                {{ form_errors(form.bmi) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                {{ form_label(form.diabetes_pedigree, 'Antécédents familiaux (0.05 - 2.5)', {'label_attr': {'class': 'form-control-label'}}) }}
+                                {{ form_widget(form.diabetes_pedigree, {'attr': {'class': 'form-control', 'placeholder': 'Ex: 0.627'}}) }}
+                                {{ form_errors(form.diabetes_pedigree) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <div class="form-group mb-3 w-100">
+                                <button class="btn app-btn-primary w-100 theme-btn mx-auto" type="submit">
+                                    🔍 Analyser
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+
+                    {% if result is defined and result %}
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="alert {% if result.is_diabetic %}alert-danger{% else %}alert-success{% endif %}">
+                                <div class="row align-items-center">
+                                    <div class="col-auto" style="font-size: 2.5rem;">
+                                        {{ result.is_diabetic ? '🔴' : '🟢' }}
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="mb-1"><strong>{{ result.message }}</strong></h5>
+                                        <span class="badge {% if result.risk_color == 'danger' %}bg-danger{% elseif result.risk_color == 'warning' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+                                            Risque {{ result.risk_level }}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <div>Probabilité diabétique : <strong>{{ result.probability_diabetic }}%</strong></div>
+                                        <div class="progress mt-1" style="height:10px;">
+                                            <div class="progress-bar {% if result.is_diabetic %}bg-danger{% else %}bg-success{% endif %}"
+                                                 style="width: {{ result.probability_diabetic }}%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if result.recommendations %}
+                            <div class="card mt-2">
+                                <div class="card-body">
+                                    <h6 class="fw-bold">💡 Recommandations</h6>
+                                    {% for rec in result.recommendations %}
+                                        <div class="p-2 mb-1 border-start border-primary border-3 bg-light rounded-end">
+                                            {{ rec }}
+                                        </div>
+                                    {% endfor %}
+                                    <small class="text-muted mt-2 d-block">
+                                        ⚕️ Ce résultat est indicatif et ne remplace pas un avis médical.
+                                    </small>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

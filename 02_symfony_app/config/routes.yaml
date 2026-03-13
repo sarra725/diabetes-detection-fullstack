@@ -1,0 +1,31 @@
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+registration:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+login:
+    path: /login
+    controller: App\Controller\LoginController::login
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
+logout:
+    path: /logout
+    controller: App\Controller\LoginController::logout
+prediction:
+    path: /prediction
+    controller: App\Controller\PredictionController::index1
+predictPlot:
+    path: /predictPlot
+    controller: App\Controller\PredictionController::plot
+predict:
+    path: /predict
+    controller: App\Controller\PredictionController::index
+resetpassword:
+    path: /resetpassword
+    controller: App\Controller\ResetPasswordController::request
+
+app_check_email:
+    path: /check-email
+    controller: App\Controller\ResetPasswordController::checkEmail

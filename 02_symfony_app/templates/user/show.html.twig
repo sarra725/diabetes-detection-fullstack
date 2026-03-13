@@ -1,0 +1,75 @@
+{% extends 'basAdmin.html.twig' %}
+
+{% block body %}
+<body class="app">
+{% include 'shared/_headerAdmin.html.twig' %}
+
+
+<div class="app-wrapper">
+
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            <di class="row">
+                <div class="col col-lg-9">
+                    <h1 class="app-page-title">Profile</h1></div>
+
+                <div class="col-2 ">
+                    <a class="btn app-btn-primary" target="_blank"
+                       href="https://app.powerbi.com/view?r=eyJrIjoiMjJkYWMzYzAtYzk0MC00NjNkLWFkZmQtNzhkODZjYjgxOWI4IiwidCI6ImRiZDY2NjRkLTRlYjktNDZlYi05OWQ4LTVjNDNiYTE1M2M2MSIsImMiOjl9">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a>
+                </div><!--//col--></di>
+            <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{% for role in user.roles %}
+
+                        {% if role == 'ROLE_ADMIN' %}
+                            Administrateur
+
+                        {% else %}
+                            User
+                        {% endif %}
+                    {% endfor %}</td>
+            </tr>
+         {#   <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>#}
+        </tbody>
+    </table>
+                <div class="row">
+                <div class="col-6">
+                </div>
+
+                <div class="col-6">
+                    <button class="btn "><a class="btn app-btn-primary"
+                                            href="{{ path('app_user_edit', {'id': user.id}) }}">Edit</a>
+                    </button>
+
+                </div>
+                </div>
+
+            </div><!--//app-content-->
+
+
+        </div><!--//app-wrapper-->
+    </div>
+</div>
+
+</body>
+{% endblock %}

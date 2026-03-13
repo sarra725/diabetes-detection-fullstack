@@ -1,0 +1,103 @@
+{% extends 'basAdmin.html.twig' %}
+
+
+
+{% block body %}
+    <body class="app app-signup p-0">
+  {% include 'shared/_headerAdmin.html.twig' %}
+    <div class="app-wrapper">
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+            <div class="container-xl">
+                <div class="col col-lg-9">
+                    <h1 class="app-page-title">Overview</h1></div>
+
+                    <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+                        <h2 class="auth-heading  mb-4">Create new user</h2>
+
+                        <div class="col-6 ">
+                            {{ form_errors(registrationForm) }}
+
+                            {{ form_start(registrationForm) }}
+                            <div class="email mb-3">
+                                {{ form_row(registrationForm.email, {
+                                    label: 'email',
+                                    label_attr: {
+                                        class: 'sr-only'
+                                    },
+                                    attr: {
+                                        class: 'form-control signup-email',
+                                        placeholder: 'example@gmail.com'
+                                    }
+                                }) }}
+                            </div>
+                            <div class="email mb-3">
+                                {{ form_row(registrationForm.name, {
+                                    label: 'name',
+                                    label_attr: {
+                                        class: 'sr-only'
+                                    },
+                                    attr: {
+                                        class: 'form-control signup-email',
+                                        placeholder: 'name'
+                                    }
+                                }) }}
+                            </div>
+                            <div class="password mb-3">
+                                <label class="sr-only" for="signup-password">Password</label>
+                                {#                        <input id="signup-password" name="signup-password" type="password" class="form-control signup-password" placeholder="Create a password" required="required"> #}
+                                {{ form_row(registrationForm.plainPassword, {
+                                    label: 'Password',
+                                    label_attr: {
+                                        class: 'sr-only'
+                                    },
+                                    attr: {
+                                        class: 'form-control signup-password',
+                                        placeholder: 'Create a password'
+                                    }
+                                }) }}
+                            </div>
+                            <div class="">
+                                {{ form_row(registrationForm.roles,
+                                    {
+                                        label: 'roles',
+                                        label_attr: {
+                                        class: 'sr-only'
+                                    },
+                                        attr: {
+                                        class: 'form-control'
+                                    }
+                                    }) }}
+
+                            </div>
+                            <div class="form-check">
+                                {{ form_row(registrationForm.agreeTerms,
+                                    {
+
+                                        attr: {
+                                        class: 'form-check-input'
+                                    }
+                                    }) }}
+
+                            </div>
+
+                            <div class="col-6 ">
+                            <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Create</button>
+                            </div>
+                            {{ form_end(registrationForm) }}
+
+                        </div><!--//auth-form-container-->
+                    </div>
+
+                </div><!--//auth-body-->
+
+
+            </div><!--//flex-column-->
+        </div><!--//auth-main-col-->
+
+
+    </div><!--//row-->
+
+
+    </body>
+{% endblock %}
+

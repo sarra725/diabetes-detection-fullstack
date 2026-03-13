@@ -1,0 +1,208 @@
+{% set currentPath = path(app.request.attributes.get('_route'),
+    app.request.attributes.get('_route_params')) %}
+<body class="app">
+<header class="app-header fixed-top">
+    <div class="app-header-inner">
+        <div class="container-fluid py-2">
+            <div class="app-header-content">
+                <div class="row justify-content-between align-items-center">
+
+                    <div class="col-auto">
+                        <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                 role="img"><title>Menu</title>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                                      stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                            </svg>
+                        </a>
+                    </div><!--//col-->
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-2 app-utility-item app-user-dropdown dropdown" >
+                        <a class="link-success dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown"
+                           style="color: #0a53be!important;"
+                           href="#"
+                           role="button" aria-expanded="false">{{ app.user.name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('app_user_show', {'id': app.user.id}) }}">Account</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href={{ path('logout') }}>Log Out</a></li>
+                        </ul>
+
+                    </div><!--//app-user-dropdown-->
+                </div><!--//app-utilities-->
+
+            </div><!--//row-->
+        </div><!--//app-header-content-->
+    </div><!--//container-fluid-->
+    </div><!--//app-header-inner-->
+    <div id="app-sidepanel" class="app-sidepanel">
+        <div id="sidepanel-drop" class="sidepanel-drop"></div>
+        <div class="sidepanel-inner d-flex flex-column">
+            <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+            <div class="app-branding">
+                <a class="app-logo" href=""><img class="logo-icon me-2"
+                                                 src={{ asset('assetsBackOffice/images/logo.png') }}
+                                                 alt="logo"><span class="logo-text">BeeCoders</span></a>
+
+            </div><!--//app-branding-->
+
+            <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+                <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+                    <li class="nav-item">
+                        {% if currentPath=="/dashboard" %}
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link active" href={{ path('dashboard') }}>
+
+                            {% else %}
+                            <a class="nav-link" href={{ path('dashboard') }}>
+
+                                {% endif %}
+                                <span class="nav-icon">
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+
+		  <path fill-rule="evenodd"
+                d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+		  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+		</svg>
+						         </span>
+                                <span class="nav-link-text">Dashboard</span>
+                            </a><!--//nav-link-->
+                    </li><!--//nav-item-->
+
+
+                    <li class="nav-item has-submenu">
+                        {% if currentPath=="/predict"  or currentPath=="/predictPlot" %}
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link submenu-toggle active" href="#" data-bs-toggle="collapse"
+                           data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+                            {% else %}
+                            <a class="nav-link submenu-toggle " href="#" data-bs-toggle="collapse"
+                               data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+                                {% endif %}
+                                <span class="nav-icon">
+						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd"
+            d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+	  <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+	</svg>
+						         </span>
+                                <span class="nav-link-text">Prediction</span>
+                                <span class="submenu-arrow">
+		                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
+                                          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd"
+            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+	</svg>
+	                             </span><!--//submenu-arrow-->
+                            </a><!--//nav-link-->
+                            <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
+                                <ul class="submenu-list list-unstyled">
+                                    {% if currentPath=="/predict" %}
+                                        <li class="submenu-item  active"><a class="submenu-link active"
+                                                                            href="{{ path('predict') }}"> Form</a></li>
+                                    {% else %}
+                                        <li class="submenu-item  "><a class="submenu-link "
+                                                                      href="{{ path('predict') }}"> Form</a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+                    </li>
+                    {% for role in app.user.roles %}<!--//nav-item-->
+                   
+
+                    {% if role=="ROLE_ADMIN" %}
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            {% if currentPath=="/user/" %}
+                            <a class="nav-link active" href={{ path('app_user_index') }}>
+                                {% else %}
+                                <a class="nav-link " href={{ path('app_user_index') }}>
+                                    {% endif %}
+                                    <span class="nav-icon">
+						      <i class="fa fa-users" aria-hidden="true"></i>
+                                        </svg>
+						         </span>
+                                    <span class="nav-link-text">Users</span>
+                                </a><!--//nav-link-->
+                        </li><!--//nav-item-->
+
+                    {% endif %}
+                    {% endfor %}
+
+                </ul><!--//app-menu-->
+            </nav><!--//app-nav-->
+
+
+        </div><!--//sidepanel-inner-->
+    </div><!--//app-sidepanel-->
+</header><!--//app-header-->
+
+
+<script>/* ===== Responsive Sidepanel ====== */
+    const sidePanelToggler = document.getElementById('sidepanel-toggler');
+    const sidePanel = document.getElementById('app-sidepanel');
+    const sidePanelDrop = document.getElementById('sidepanel-drop');
+    const sidePanelClose = document.getElementById('sidepanel-close');
+    console.log(sidePanelToggler)
+    console.log(sidePanel)
+    window.addEventListener('load', function () {
+        responsiveSidePanel();
+    });
+
+    window.addEventListener('resize', function () {
+        responsiveSidePanel();
+    });
+
+
+    function responsiveSidePanel() {
+        let w = window.innerWidth;
+        if (w >= 1200) {
+            // if larger
+            //console.log('larger');
+            sidePanel.classList.remove('sidepanel-hidden');
+            sidePanel.classList.add('sidepanel-visible');
+
+        } else {
+            // if smaller
+            //console.log('smaller');
+            sidePanel.classList.remove('sidepanel-visible');
+            sidePanel.classList.add('sidepanel-hidden');
+        }
+    };
+
+    sidePanelToggler.addEventListener('click', () => {
+        if (sidePanel.classList.contains('sidepanel-visible')) {
+            console.log('visible');
+            sidePanel.classList.remove('sidepanel-visible');
+            sidePanel.classList.add('sidepanel-hidden');
+
+        } else {
+            console.log('hidden');
+            sidePanel.classList.remove('sidepanel-hidden');
+            sidePanel.classList.add('sidepanel-visible');
+        }
+    });
+
+
+    sidePanelClose.addEventListener('click', (e) => {
+        e.preventDefault();
+        sidePanelToggler.click();
+    });
+
+    sidePanelDrop.addEventListener('click', (e) => {
+        sidePanelToggler.click();
+    });
+
+
+</script>
+</body>
+

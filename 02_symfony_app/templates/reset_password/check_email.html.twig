@@ -1,0 +1,42 @@
+{% extends 'basAdmin.html.twig' %}
+
+{% block title %}Password Reset Email Sent{% endblock %}
+
+{% block body %}
+<body class="app app-login p-0">
+<div class="row g-0 app-auth-wrapper">
+    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+        <div class="d-flex flex-column align-content-end">
+            <div class="app-auth-body mx-auto">
+                <div class="app-auth-branding mb-4"><a class="app-logo" href="{{ path('index') }}"><img
+                                class="logo-icon me-2"
+                                src={{ asset('assetsBackOffice/images/logo.png') }} alt="logo"></a></div>
+                <h2 class="auth-heading text-center mb-5">Log in to Med oil</h2>
+                <div class="auth-form-container text-start">
+    <p>
+        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+    <p>If you don't receive an email please check your spam folder or <a href="{{ path('resetpassword') }}">try again</a>.</p>
+                </div><!--//auth-form-container-->
+
+
+            </div><!--//auth-body-->
+
+
+        </div><!--//flex-column-->
+    </div><!--//auth-main-col-->
+    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+        <div class="auth-background-holder">
+        </div>
+        <div class="auth-background-mask"></div>
+        <div class="auth-background-overlay p-3 p-lg-5">
+            <div class="d-flex flex-column align-content-end h-100">
+                <div class="h-100"></div>
+
+            </div>
+        </div><!--//auth-background-overlay-->
+    </div><!--//auth-background-col-->
+
+</div><!--//row-->
+                    {% endblock %}

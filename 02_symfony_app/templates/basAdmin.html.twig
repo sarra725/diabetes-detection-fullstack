@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Détection du diabète{% endblock %}</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+
+
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        <link rel="icon" type="image/png" href={{ asset('assetsFrontOffice/images/logo.png') }} >
+
+        {{ encore_entry_link_tags('app') }}
+        <!-- App CSS -->
+        <link id="theme-style" rel="stylesheet" href={{ asset('assetsBackOffice/css/portal.css') }}>
+
+    {% endblock %}
+
+
+</head>
+
+<body>
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    <script defer src={{ asset('assetsBackOffice/plugins/fontawesome/js/all.min.js') }}></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Javascript -->
+    <script src={{ asset('assetsBackOffice/plugins/popper.min.js') }}></script>
+    <script src={{ asset('assetsBackOffice/plugins/bootstrap/js/bootstrap.min.js') }}></script>
+
+    <!-- Charts JS -->
+    <script src={{ asset('assetsBackOffice/plugins/chart.js/chart.min.js') }}></script>
+    <script src={{ asset('assetsBackOffice/js/index-charts.js') }}></script>
+
+    <!-- Page Specific JS -->
+    <script src={{ asset('assetsBackOffice/js/app.js') }}></script>
+    <!-- FontAwesome JS-->
+    <script defer src={{ asset('assetsBackOffice/plugins/fontawesome/js/all.min.js') }}></script>
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+</body>
+
+</html>

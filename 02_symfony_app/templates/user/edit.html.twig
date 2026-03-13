@@ -1,0 +1,98 @@
+{% extends 'basAdmin.html.twig' %}
+
+
+
+{% block body %}
+    <body class="app">
+    {% include 'shared/_headerAdmin.html.twig' %}
+
+
+    <div class="app-wrapper">
+
+        <div class="app-content pt-3 p-md-3 p-lg-4">
+            <div class="container-xl">
+                <di class="row">
+                    <div class="col col-lg-9">
+                        <h1 class="app-page-title">Users</h1></div>
+
+                    <div class="col-2 ">
+                        <a class="btn app-btn-primary" target="_blank"
+                           href="https://app.powerbi.com/view?r=eyJrIjoiMjJkYWMzYzAtYzk0MC00NjNkLWFkZmQtNzhkODZjYjgxOWI4IiwidCI6ImRiZDY2NjRkLTRlYjktNDZlYi05OWQ4LTVjNDNiYTE1M2M2MSIsImMiOjl9">
+                            <i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a>
+                    </div><!--//col--></di>
+                <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+
+                {% for role in app.user.roles %}<!--//nav-item-->
+
+
+                {% if role=="ROLE_ADMIN" %}
+                    <a href="{{ path('app_user_index') }}"><i class="fa fa-arrow-left"
+                                                              aria-hidden="true"></i>
+                        back to list</a>
+                    {% endif %}
+                    {% endfor %}
+                    <h1>Edit User</h1>
+
+                    {#    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }} #}
+                    {{ form_errors(form) }}
+
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-6 email mb-3">
+                            {{ form_row(form.email, {
+                                label: 'email',
+                                label_attr: {
+                                    class: 'sr-only'
+                                },
+                                attr: {
+                                    class: 'form-control signup-email',
+                                    placeholder: 'example@gmail.com'
+                                }
+                            }) }}
+                        </div>
+                        <div class="col-6"></div>
+                        <div class="col-6 email mb-3">
+                            {{ form_row(form.name, {
+                                label: 'name',
+                                label_attr: {
+                                    class: 'sr-only'
+                                },
+                                attr: {
+                                    class: 'form-control signup-email',
+                                    placeholder: 'name'
+                                }
+                            }) }}
+                        </div>
+                        <div class="col-6"></div>
+                        <div class="col-6 ">
+                            {{ form_row(form.roles,
+                                {
+
+                                    label_attr: {
+                                    class: 'sr-only'
+                                },
+                                    attr: {
+                                    class: 'form-control'
+                                }
+                                } ) }}
+
+                        </div>
+                        <div class="col-6"></div>
+                        <div class="col-4"></div>
+                        <div class="col-2">
+
+                            <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Update</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+
+
+                </div><!--//app-content-->
+
+
+            </div><!--//app-wrapper-->
+        </div>
+    </div>
+
+    </body>
+{% endblock %}
